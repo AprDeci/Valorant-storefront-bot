@@ -8,19 +8,19 @@ const bodyParser = require('body-parser');
 const client = new API(Regions.AP);
 const content = new ContentAPI(Languages.Chinese_Traditional);
 const schedul = require("node-schedule")
-const url = 'https://	tgvlorantbot.126386.xyz'
+const url = 'https://tgvlorantbot.126386.xyz'
 const port = 12638
 client.user_agent = "RiotClient/67.0.8.154.1064 %s (Windows;10;;Professional, x64)"
 client.client_version = "release-07.01-shipping-17-917901"
 
 
   //初始化webhook
-  bot.setWebHook(`${url}/bot${TOKEN}`)
+  bot.setWebHook(`${url}/bot${tgbottoken}`)
   const app = express();
   app.use(bodyParser.json());
   app.get('/', (req, res) => res.send('Valorant-storefront-bot'));
 
-  app.post(`/bot${TOKEN}`, (req, res) => {
+  app.post(`/bot${tgbottoken}`, (req, res) => {
   bot.processUpdate(req.body);
   res.sendStatus(200);
 });
