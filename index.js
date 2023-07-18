@@ -3,15 +3,30 @@ const { API, ContentAPI, Languages, Regions } = require("@liamcottle/valorant.js
 const tgbot = require('node-telegram-bot-api');
 const tgbottoken = '5833380838:AAHp2hGKlVh3hqCOpOxpOm3Hohk9PH2EJVA'
 const bot = new tgbot(tgbottoken,{polling:true})
+const express = require('express');
+const bodyParser = require('body-parser');
 const client = new API(Regions.AP);
 const content = new ContentAPI(Languages.Chinese_Traditional);
 const schedul = require("node-schedule")
+const url = 'https://	tgvlorantbot.126386.xyz'
+const port = 12638
 client.user_agent = "RiotClient/67.0.8.154.1064 %s (Windows;10;;Professional, x64)"
 client.client_version = "release-07.01-shipping-17-917901"
-// authorize using the ClientAPI
 
 
-  
+  //初始化webhook
+  bot.setWebHook(`${url}/bot${TOKEN}`)
+  const app = express();
+  app.use(bodyParser.json());
+  app.get('/', (req, res) => res.send('Valorant-storefront-bot'));
+
+  app.post(`/bot${TOKEN}`, (req, res) => {
+  bot.processUpdate(req.body);
+  res.sendStatus(200);
+});
+  app.listen(port, () => {
+    console.log(`Express server is listening on ${port}`);
+});
     
     // 获取chatid.
     // bot.onText(/\/mychatid/,function(msg){
