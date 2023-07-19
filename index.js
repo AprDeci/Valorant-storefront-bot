@@ -42,8 +42,8 @@ client.client_version = "release-07.01-shipping-17-917901"
 
     
 
-    //定时发送每日商店
-    const everyStoreFront = schedul.scheduleJob('01 8 * * *',function(){
+    //定时发送每日商店 在服务器使用改为 01 1 * * *
+    const everyStoreFront = schedul.scheduleJob('01 8 * * *',()=>{
       senditeminfo()
     })
 
