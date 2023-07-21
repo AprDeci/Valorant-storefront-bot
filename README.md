@@ -16,3 +16,9 @@ User=''
 PASSWORD=''
 ~~~
 
+## v1.1
+
+图片优化（背景图自己做的，有没有哪个会PS大佬给美化美化）
+
+![shopimg](https://luchetuchuang.oss-cn-beijing.aliyuncs.com/aprimg/shopimg.png)
+

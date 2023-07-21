@@ -1,5 +1,6 @@
 // import modules
 require('dotenv').config()
+const storeimg = require("./src/storeimg.js")
 const { API, ContentAPI, Languages, Regions } = require("@liamcottle/valorant.js");
 const tgbot = require('node-telegram-bot-api');
 const tgbottoken = process.env.TOKEN
@@ -30,12 +31,6 @@ client.client_version = "release-07.01-shipping-17-917901"
     console.log(`Express server is listening on ${port}`);
 });
     
-    // 获取chatid.
-    // bot.onText(/\/mychatid/,function(msg){
-    //   var id = msg.chat.id
-    //   bot.sendMessage(msg.chat.id,id)
-    // })
-
     ///shop命令查询每日商店
     bot.onText(/\/shop/,(msg)=>{
       console.log("/shop查询")
@@ -48,8 +43,6 @@ client.client_version = "release-07.01-shipping-17-917901"
     const everyStoreFront = schedul.scheduleJob('01 8 * * *',()=>{
       senditeminfo(1949366681)
     })
-
-
 
 
 function senditeminfo(chatid){
@@ -69,25 +62,8 @@ function senditeminfo(chatid){
          response.data.SkinsPanelLayout.SingleItemOffers[3]
   );
   await bot.sendMessage(chatid,item1.displayName+'\r\n'+item2.displayName+'\r\n'+item3.displayName+'\r\n'+item4.displayName)
-  pictures =[{
-    type: "photo",
-    media:item1.displayIcon,
-  },
-  {
-    type: "photo",
-    media:item2.displayIcon,
-  },
-  {
-    type: "photo",
-    media:item3.displayIcon,
-  },
-  {
-    type: "photo",
-    media:item4.displayIcon,
-  }
-  ],
-  bot.sendMediaGroup(chatid,pictures);
-  bot.sendMessage(chatid,item4.displayIcon)
+  storeimg.shopimg(item1.displayIcon,item2.displayIcon,item3.displayIcon,item4.displayIcon)
+  bot.sendPhoto(chatid,__dirname+"\\src\\img\\shopimg.png");
 },
     )}
   )}
