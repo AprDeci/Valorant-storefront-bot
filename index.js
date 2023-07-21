@@ -1,5 +1,6 @@
 // import modules
 require('dotenv').config()
+const path = require('path')
 const storeimg = require("./src/storeimg.js")
 const { API, ContentAPI, Languages, Regions } = require("@liamcottle/valorant.js");
 const tgbot = require('node-telegram-bot-api');
@@ -37,7 +38,7 @@ client.client_version = "release-07.01-shipping-17-917901"
       senditeminfo(msg.chat.id)
     })
 
-    
+
 
     //定时发送每日商店 在服务器使用改为 01 1 * * *
     const everyStoreFront = schedul.scheduleJob('01 8 * * *',()=>{
@@ -61,9 +62,10 @@ function senditeminfo(chatid){
       const item4 = await content.getWeaponSkinLevelByUuid(
          response.data.SkinsPanelLayout.SingleItemOffers[3]
   );
-  await bot.sendMessage(chatid,item1.displayName+'\r\n'+item2.displayName+'\r\n'+item3.displayName+'\r\n'+item4.displayName)
+  var message = item1.displayName+'\r\n'+item2.displayName+'\r\n'+item3.displayName+'\r\n'+item4.displayName
   storeimg.shopimg(item1.displayIcon,item2.displayIcon,item3.displayIcon,item4.displayIcon)
-  bot.sendPhoto(chatid,__dirname+"\\src\\img\\shopimg.png");
+  bot.sendPhoto(chatid,path.join(__dirname,'src/img/shopimg.png'),{caption:message});
 },
     )}
   )}
+

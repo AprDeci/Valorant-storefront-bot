@@ -1,7 +1,8 @@
 const sharp = require('sharp')
 const axios = require('axios')
 const fs = require('fs')
-const background = sharp(__dirname+'\\img\\background.png')
+const path = require('path')
+const background = sharp(path.join(__dirname,'img/background.png'))
 //获取网络图片buffer
 async function getimg(url) {
   try {
@@ -32,7 +33,7 @@ background
     { input: image3, blend:"add",left:0,top:286 },
     { input: image4, blend:"add",left:0,top:424 },
   ]) 
-  .toFile(__dirname+'\\img\\shopimg.png');
+  .toFile(path.join(__dirname,'img/shopimg.png'));
 }
 
 module.exports.shopimg = shopimg
