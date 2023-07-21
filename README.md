@@ -12,7 +12,7 @@
 PORT=''
 TOKEN=''
 URL=''
-USERNAME=''
+User=''
 PASSWORD=''
 ~~~
 

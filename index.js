@@ -11,6 +11,8 @@ const content = new ContentAPI(Languages.Chinese_Traditional);
 const schedul = require("node-schedule")
 const url = process.env.URL
 const port = process.env.PORT
+const username = process.env.User
+const password = process.env.PASSWORD
 client.user_agent = "RiotClient/67.0.8.154.1064 %s (Windows;10;;Professional, x64)"
 client.client_version = "release-07.01-shipping-17-917901"
 
@@ -51,7 +53,7 @@ client.client_version = "release-07.01-shipping-17-917901"
 
 
 function senditeminfo(chatid){
-  client.authorize(process.env.USERNAME,process.env.PASSWORD).then(() => {
+  client.authorize(username,password).then(() => {
     client.getPlayerStoreFront(client.user_id).then(async (response) => {
       //获取每日商店武器uuid
         const item1 = await content.getWeaponSkinLevelByUuid(
