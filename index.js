@@ -35,22 +35,22 @@ client.client_version = "release-07.01-shipping-17-917901"
     // })
 
     ///shop命令查询每日商店
-    bot.onText(/\/shop/,function(){
+    bot.onText(/\/shop/,(msg)=>{
       console.log("/shop查询")
-      senditeminfo()
+      senditeminfo(msg.chat.id)
     })
 
     
 
     //定时发送每日商店 在服务器使用改为 01 1 * * *
     const everyStoreFront = schedul.scheduleJob('01 8 * * *',()=>{
-      senditeminfo()
+      senditeminfo(1949366681)
     })
 
 
 
 
-function senditeminfo(){
+function senditeminfo(chatid){
   client.authorize(process.env.USERNAME,process.env.PASSWORD).then(() => {
     client.getPlayerStoreFront(client.user_id).then(async (response) => {
       //获取每日商店武器uuid
@@ -66,7 +66,7 @@ function senditeminfo(){
       const item4 = await content.getWeaponSkinLevelByUuid(
          response.data.SkinsPanelLayout.SingleItemOffers[3]
   );
-  await bot.sendMessage(1949366681,item1.displayName+'\r\n'+item2.displayName+'\r\n'+item3.displayName+'\r\n'+item4.displayName)
+  await bot.sendMessage(chatid,item1.displayName+'\r\n'+item2.displayName+'\r\n'+item3.displayName+'\r\n'+item4.displayName)
   pictures =[{
     type: "photo",
     media:item1.displayIcon,
@@ -84,7 +84,8 @@ function senditeminfo(){
     media:item4.displayIcon,
   }
   ],
-  bot.sendMediaGroup(1949366681,pictures);
+  bot.sendMediaGroup(chatid,pictures);
+  bot.sendMessage(chatid,item4.displayIcon)
 },
     )}
   )}
