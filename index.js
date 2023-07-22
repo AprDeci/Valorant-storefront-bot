@@ -63,8 +63,8 @@ function senditeminfo(chatid){
          response.data.SkinsPanelLayout.SingleItemOffers[3]
   );
   var message = item1.displayName+'\r\n'+item2.displayName+'\r\n'+item3.displayName+'\r\n'+item4.displayName
-  storeimg.shopimg(item1.displayIcon,item2.displayIcon,item3.displayIcon,item4.displayIcon)
-  bot.sendPhoto(chatid,path.join(__dirname,'src/img/shopimg.png'),{caption:message});
+      const img=await storeimg.shopimg(item1.displayIcon,item2.displayIcon,item3.displayIcon,item4.displayIcon)
+      bot.sendPhoto(chatid,img,{caption:message})
 },
     )}
   )}
