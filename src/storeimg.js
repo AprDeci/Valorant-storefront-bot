@@ -26,14 +26,17 @@ var imgbuffer4=await getimg(img4)
 var image4 = await sharp(imgbuffer4).resize({height:128,width:512,fit:"contain"}).toBuffer()
 
 
-background
+const shopimgbuffer=background
   .composite([
     { input: image1, blend:"add",left:0,top:10 },
     { input: image2, blend:"add",left:0,top:148 },
     { input: image3, blend:"add",left:0,top:286 },
     { input: image4, blend:"add",left:0,top:424 },
   ]) 
-  .toFile(path.join(__dirname,'img/shopimg.png'));
+  .toBuffer()
+  
+  //.toFile(path.join(__dirname,'img/shopimg.png'));
+  return shopimgbuffer
 }
 
 module.exports.shopimg = shopimg
