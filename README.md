@@ -26,6 +26,8 @@ PASSWORD=''
 
 武器更改为图片上,不在随captuer发送
 
+![image-20230723220953912](https://luchetuchuang.oss-cn-beijing.aliyuncs.com/aprimg/image-20230723220953912.png)
+
 ## To Do
 
 - [ ] 美化图片
