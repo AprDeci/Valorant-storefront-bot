@@ -22,3 +22,12 @@ PASSWORD=''
 
 ![image-20230722065027658](https://luchetuchuang.oss-cn-beijing.aliyuncs.com/aprimg/image-20230722065027658.png)
 
+## v1.2
+
+武器更改为图片上,不在随captuer发送
+
+## To Do
+
+- [ ] 美化图片
+- [ ] 历史战绩查询
+

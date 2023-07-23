@@ -41,7 +41,7 @@ client.client_version = "release-07.01-shipping-17-917901"
 
 
     //定时发送每日商店 在服务器使用改为 01 1 * * *
-    const everyStoreFront = schedul.scheduleJob('01 8 * * *',()=>{
+    const everyStoreFront = schedul.scheduleJob('01 1 * * *',()=>{
       senditeminfo(1949366681)
     })
 
@@ -62,9 +62,9 @@ function senditeminfo(chatid){
       const item4 = await content.getWeaponSkinLevelByUuid(
          response.data.SkinsPanelLayout.SingleItemOffers[3]
   );
-  var message = item1.displayName+'\r\n'+item2.displayName+'\r\n'+item3.displayName+'\r\n'+item4.displayName
-      const img=await storeimg.shopimg(item1.displayIcon,item2.displayIcon,item3.displayIcon,item4.displayIcon)
-      bot.sendPhoto(chatid,img,{caption:message})
+      var wname = [item1.displayName,item2.displayName,item3.displayName,item4.displayName]
+      const img=await storeimg.shopimg(item1.displayIcon,item2.displayIcon,item3.displayIcon,item4.displayIcon,wname)
+      bot.sendPhoto(chatid,img)
 },
     )}
   )}
