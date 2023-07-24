@@ -40,32 +40,62 @@ client.client_version = "release-07.01-shipping-17-917901"
 
 
 
-    //定时发送每日商店 在服务器使用改为 01 1 * * *
-    const everyStoreFront = schedul.scheduleJob('01 1 * * *',()=>{
+    //定时发送每日商店 在服务器使用改为 01 0 * * *
+    const everyStoreFront = schedul.scheduleJob('01 0 * * *',()=>{
+      //清空缓存
+      cache = {};
       senditeminfo(1949366681)
     })
 
+    //缓存,数据结构为之后多账户准备
+    const cache = {};
+    function loadtocache(Buffer,key){
+      try{
+      cache[key] = {
+        data : Buffer
+        //暂时不需要cache定时,因为每天八点自动清空
+      }}
+      catch(error){
+        console.log("缓存${key}存放失败")
+      }
+    }
+    function getcache(key){
+      const cacheitem = cache[key]
+      if(cacheitem){
+        return cacheitem.data
+      }else{
+        return null
+      }
+    }
 
-function senditeminfo(chatid){
+
+async function senditeminfo(chatid){
+  const cache = getcache(username)
+  if(cache){
+    bot.sendPhoto(chatid,cache)
+    console.log("通过cache发送")
+  }else{
   client.authorize(username,password).then(() => {
     client.getPlayerStoreFront(client.user_id).then(async (response) => {
       //获取每日商店武器uuid
         const item1 = await content.getWeaponSkinLevelByUuid(
           response.data.SkinsPanelLayout.SingleItemOffers[0]
       );
-      const item2 = await content.getWeaponSkinLevelByUuid(
-        response.data.SkinsPanelLayout.SingleItemOffers[1]
-    );
-      const item3 = await content.getWeaponSkinLevelByUuid(
-        response.data.SkinsPanelLayout.SingleItemOffers[2]
-  );
-      const item4 = await content.getWeaponSkinLevelByUuid(
-         response.data.SkinsPanelLayout.SingleItemOffers[3]
-  );
+        const item2 = await content.getWeaponSkinLevelByUuid(
+          response.data.SkinsPanelLayout.SingleItemOffers[1]
+      );
+        const item3 = await content.getWeaponSkinLevelByUuid(
+          response.data.SkinsPanelLayout.SingleItemOffers[2]
+      );
+        const item4 = await content.getWeaponSkinLevelByUuid(
+          response.data.SkinsPanelLayout.SingleItemOffers[3]
+      );
       var wname = [item1.displayName,item2.displayName,item3.displayName,item4.displayName]
       const img=await storeimg.shopimg(item1.displayIcon,item2.displayIcon,item3.displayIcon,item4.displayIcon,wname)
+      //根据username存储cache
+      await loadtocache(img,username)
       bot.sendPhoto(chatid,img)
-},
+  }
     )}
-  )}
+  )}}
 

@@ -20,17 +20,19 @@ PASSWORD=''
 
 图片优化（背景图自己做的，有没有哪个会PS大佬给美化美化）
 
-![image-20230722065027658](https://luchetuchuang.oss-cn-beijing.aliyuncs.com/aprimg/image-20230722065027658.png)
-
 ## v1.2
 
 武器更改为图片上,不在随captuer发送
 
 ![image-20230723220953912](https://luchetuchuang.oss-cn-beijing.aliyuncs.com/aprimg/image-20230723220953912.png)
 
+## v1.3
+
+添加缓存,每天8点自动清空.
+
 ## To Do
 
 - [ ] 美化图片
 - [ ] 历史战绩查询
-- [ ] 数据缓存
+- [x] 数据缓存(历史战绩查询加入前使用简单缓存)
 
